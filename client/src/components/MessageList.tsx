@@ -1,13 +1,30 @@
-function MyButton() {
-  return (
-    <p>Šeit kaut kur apakšā būs List - Aleksandra darbs</p>
-  );
-}
+import { useEffect, useState } from "react";
 
-export default function MyApp() {
+type Message = {
+  id: number;
+  title: string;
+  body: string;
+  timestamp: string;
+};
+
+export default function Messages() {
+  const [messages, setMessages] = useState<Message[]>([]);
+
+  useEffect(() => {
+    fetch("http://localhost:4000/api/messages")
+      .then(res => res.json())
+      .then((data: Message[]) => setMessages(data));
+  }, []);
+
   return (
     <div>
-      <MyButton />
+      {messages.map(msg => (
+        <div key={msg.id}>
+          <h3>{msg.title}</h3>
+          <p>{msg.body}</p>
+          <small>{msg.timestamp}</small>
+        </div>
+      ))}
     </div>
   );
 }

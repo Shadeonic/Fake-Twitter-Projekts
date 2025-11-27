@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-export default function MessageForm() {
+export default function MessageForm({ onMessagePosted }: { onMessagePosted?: () => void }) {
   const [formData, setFormData] = useState({ title: "", body: "" });//sākuma dati, saglbā ievadītos
 
   //parāda visu reālajā laikā
@@ -16,11 +16,25 @@ export default function MessageForm() {
   };
 
   //Submit poga
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); // Noliez refresh
-    console.log("Submitted:", formData);
-    setFormData({ title: "", body: "" }); //Attīra pēc ievades
-  };
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  // Send to backend
+  await fetch("http://localhost:4000/api/messages", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(formData),
+  });
+
+  // Clear form
+  setFormData({ title: "", body: "" });
+
+  // Tell parent to refresh messages
+  if (typeof onMessagePosted === "function") {
+    onMessagePosted();
+  }
+};
+
 
   return (
     <section className="border-[#999999] border mx-auto mt-4 text-white">
