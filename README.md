@@ -24,3 +24,29 @@ cp .env.example .env
 npm run dev
 # Client: http://localhost:5173  (proxy to server /api)
 # Server: http://localhost:4000
+--------------------------------------------------------------------------
+FOR ME:
+START SERVER:
+Back-end: 
+cd C:\Users\PC\Desktop\PRAKSE\Fake-Twitter-Projekts\server
+node src/index.js 
+
+Front-end: 
+cd C:\Users\PC\Desktop\PRAKSE\Fake-Twitter-Projekts\client
+npm run dev
+
+TESTS:
+Test in terminal: 
+See all messages: 
+curl http://localhost:4000/api/messages 
+
+Write new message: 
+curl -X POST http://localhost:4000/api/messages -H "Content-Type: application/json" -d "{\"title\":\"Test\",\"body\":\"Hello from curl\"}"
+
+WHERE TO FIND IN LOCALHOST:
+Open: 
+Front-end: 
+http://localhost:5173/ 
+
+Back-end: 
+http://localhost:4000/api/messages
