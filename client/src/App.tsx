@@ -1,41 +1,19 @@
 import { useEffect, useState } from "react";
+import MessageForm from './components/MessageForm';
+import MessageList from './components/MessageList';
 
 type Health = { ok: boolean; timestamp: string };
 
 export default function App() {
-  const [health, setHealth] = useState<Health | null>(null);
-  const [echo, setEcho] = useState("");
 
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_BASE || "/api"}/health`)
-      .then((r) => r.json())
-      .then(setHealth)
-      .catch(console.error);
-  }, []);
-
-  const onEcho = async () => {
-    const res = await fetch(`${import.meta.env.VITE_API_BASE || "/api"}/echo`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: "Hello from React!" }),
-    });
-    const data = await res.json();
-    setEcho(data.message);
-  };
 
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", padding: 24 }}>
-      <h1>React + Express + TypeScript</h1>
-      <p>Health: {health ? <code>{JSON.stringify(health)}</code> : "Loading..."}</p>
-      <button onClick={onEcho}>Send Echo</button>
-      {echo && (
-        <p>
-          Echo response: <code>{echo}</code>
-        </p>
-      )}
-      <p style={{ marginTop: 24 }}>
-        Try editing <code>client/src/App.tsx</code>.
-      </p>
+    <div className="min-h-screen bg-[#0a0a0a] text-white font-sans text-sm">
+      <div className="relative h-[5.5rem]"></div>
+      <div className="max-w-[39.25rem] mx-auto px-2">
+        <MessageForm />
+        <MessageList />
+      </div>
     </div>
   );
 }
