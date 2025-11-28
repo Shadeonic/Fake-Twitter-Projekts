@@ -44,14 +44,14 @@ return (
                 onClick={() => vote(msg.id, +1)}
                 className="text-green-400 hover:text-green-300 cursor-pointer text-xl"
               >
-                ▲
+                ⇧
               </button>
             <div>{msg.vote}</div>
               <button
                 onClick={() => vote(msg.id, -1)}
                 className="text-red-400 hover:text-red-300 cursor-pointer text-xl"
               >
-                ▼
+                ⇩
               </button>
           </div>
         </div>

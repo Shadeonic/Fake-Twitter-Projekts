@@ -57,7 +57,8 @@ if (diff < 10) {
     body,
     ip: req.ip || "",               // user IP
     vote: 0,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
+    voters: {} //ip + votes - +1/-1
   };
 
   // jaunākais - pirmais
@@ -73,6 +74,7 @@ if (diff < 10) {
 app.post("/api/messages/:id/vote", (req, res) => {
   const id = Number(req.params.id);
   const delta = req.body.delta; // +1 or -1
+  const ip = req.ip || "";
 
   const msg = messages.find(m => m.id === id);
   if (!msg) return res.status(404).json({ error: "Not found" });
@@ -81,10 +83,23 @@ app.post("/api/messages/:id/vote", (req, res) => {
     return res.status(400).json({ error: "delta must be +1 or -1" });
   }
 
+  msg.voters = msg.voters || {};
+
+  // Ja jau vienu reizi novotoja tāpat
+  if (msg.voters[ip] === delta) {
+    return res.status(400).json({ error: "Already voted same" });
+  }
+
+  // IJa maina vote uz pretējo
+  if (msg.voters[ip]) {
+    msg.vote -= msg.voters[ip];
+  }
+
+  msg.voters[ip] = delta;
   msg.vote += delta;
-  res.json(msg);
 
   fs.writeFileSync("data/messages.json", JSON.stringify(messages, null, 2));
+  res.json(msg);
 });
 
 app.listen(PORT, () => {
