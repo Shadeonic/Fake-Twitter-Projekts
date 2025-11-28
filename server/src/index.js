@@ -32,6 +32,7 @@ app.post("/api/messages", (req, res) => {
     title,
     body,
     ip: req.ip || "",               // user IP
+    vote: 0,
     timestamp: new Date().toISOString()
   };
 
@@ -40,6 +41,21 @@ app.post("/api/messages", (req, res) => {
 
   res.status(201).json(msg);
 });
+
+// app.post("/api/messages/:id/vote", (req, res) => {
+//   const id = Number(req.params.id);
+//   const delta = req.body.delta; // +1 or -1
+
+//   const msg = messages.find(m => m.id === id);
+//   if (!msg) return res.status(404).json({ error: "Not found" });
+
+//   if (delta !== 1 && delta !== -1) {
+//     return res.status(400).json({ error: "delta must be +1 or -1" });
+//   }
+
+//   msg.vote += delta;
+//   res.json(msg);
+// });
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
