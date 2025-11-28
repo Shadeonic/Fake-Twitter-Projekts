@@ -19,12 +19,19 @@ export default function MessageForm({ onMessagePosted }: { onMessagePosted?: () 
 const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
 
+  try{
   // Send to backend
-  await fetch("http://localhost:4000/api/messages", {
+  const res = await fetch("http://localhost:4000/api/messages", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(formData),
   });
+
+  if (!res.ok) {
+      const data = await res.json();
+      alert(data.error); // 👈 show error to user
+      return;
+    }
 
   // Clear form
   setFormData({ title: "", body: "" });
@@ -33,15 +40,18 @@ const handleSubmit = async (e: React.FormEvent) => {
   if (typeof onMessagePosted === "function") {
     onMessagePosted();
   }
+  } catch (err) {
+    console.error("Failed to post message", err);
+  }
 };
 
 
   return (
     <section className="border-[#999999] border mx-auto mt-4 text-white">
-      <form onSubmit={handleSubmit} className="flex flex-col p-4 gap-4">
+      <form onSubmit={handleSubmit} className="flex flex-col p-4 gap-3">
         {/* Title */}
         <div className="relative border border-[#999999] p-2">
-          <label htmlFor="Title" className="absolute -top-3 left-2 bg-black px-1 text-lg font-bold">Title</label>
+          <label htmlFor="Title" className="absolute -top-3 left-2 bg-black px-1 text-sm font-bold">Title</label>
           <input
             type="text"
             name="title"
@@ -53,7 +63,7 @@ const handleSubmit = async (e: React.FormEvent) => {
         </div>
         {/* Message */}
         <div className="relative border border-[#999999] p-2">
-          <label htmlFor="Message" className="absolute -top-3 left-2 bg-black px-1 text-lg font-bold">Message</label>
+          <label htmlFor="Message" className="absolute -top-3 left-2 bg-black px-1 text-sm font-bold">Message</label>
           <textarea
             name="body"
             value={formData.body}
