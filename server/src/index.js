@@ -97,6 +97,19 @@ app.post("/api/messages", async (req, res) => {
   }
 });
 
+// Every 10 seconds, broadcast all messages
+setInterval(async () => {
+  if (!messagesCollection) return;
+  try {
+    const msgs = await messagesCollection
+      .find({})
+      .sort({ timestamp: -1 })
+      .toArray();
+    io.emit("messagesUpdate", msgs);
+  } catch (err) {
+    console.error("Failed to broadcast messages:", err);
+  }
+}, 10000);
 
 //Iespējami labi uztaisīta voting sistēma
 app.post("/api/messages/:id/vote", async (req, res) => {

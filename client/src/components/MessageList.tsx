@@ -12,10 +12,13 @@ type Message = {
 type MessageListProps = {
   page: number;
   limit: number;
+  onTotalPages?: (n: number) => void;
 };
 
-export default function Messages({ page, limit }: MessageListProps) {
+export default function Messages({ page, limit, onTotalPages}: MessageListProps) {
   const [messages, setMessages] = useState<Message[]>([]);
+  const totalPages = Math.ceil(messages.length / limit);
+
 
   useEffect(() => {
     loadMessages();
@@ -32,10 +35,22 @@ export default function Messages({ page, limit }: MessageListProps) {
       );
     });
 
+    socket.on("messagesUpdate", (msgs: Message[]) => {
+      setMessages(msgs);
+    });
+
     return () => {
       socket.disconnect();
     };
+
+    
   }, []);
+  useEffect(() => {
+    if (onTotalPages) {
+      onTotalPages(totalPages);
+    }
+  }, [messages]);
+
 
   const loadMessages = () => {
     fetch("http://localhost:4000/api/messages")

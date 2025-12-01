@@ -6,6 +6,7 @@ export default function App() {
   const [messageSent, setMessageSent] = useState(false);
   const [page, setPage] = useState(1);
   const [limit, setLimit ] = useState(10);
+  const [totalPages, setTotalPages] = useState(1);
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white font-mono text-sm">
@@ -32,7 +33,7 @@ export default function App() {
           }}
         />
         <div className="relative h-[3.5rem]"></div>
-        <MessageList page={page} limit={limit}/>
+        <MessageList page={page} limit={limit} onTotalPages={setTotalPages}/>
       </div>
       <div className="relative h-[2rem]"></div>
       <div className="flex justify-center gap-4 mt-4">
@@ -46,7 +47,7 @@ export default function App() {
         <span>Page: {page}</span>
 
         <button
-          onClick={() => setPage(p => p + 1)}
+           onClick={() => setPage(p => Math.min(p + 1, totalPages))}
           className="px-3 py-1 border border-gray-500 rounded"
         >
           Next
