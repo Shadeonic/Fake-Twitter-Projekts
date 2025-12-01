@@ -19,50 +19,48 @@ export default function MessageForm({ onMessagePosted }: { onMessagePosted?: () 
 
   //Submit poga
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  e.preventDefault();
+  if (cooldown > 0) return; // guard: no submits during cooldown
 
-    try{
-    // Send to backend
-      const res = await fetch("http://localhost:4000/api/messages", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+  try {
+    const res = await fetch("http://localhost:4000/api/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
 
-      const data = await res.json();//waiting
+    const data = await res.json(); // parse once
 
-      if (!res.ok) {
-        const data = await res.json();
-        alert(data.error); // show error to user
-        return;
+    if (!res.ok) {
+      alert(data.error || "Failed to post message");
+      // Optional: if backend returns "Please wait Xs", sync cooldown
+      const match = /Please wait (\d+)s/.exec(data.error || "");
+      if (match) {
+        const seconds = Number(match[1]);
+        setCooldown(seconds);
+        startCooldown(seconds);
       }
-
-      // Clear form
-      setFormData({ title: "", body: "" });
-
-      setCooldown(10); // 10s cooldown
-
-      // Tell parent to refresh messages
-      if (typeof onMessagePosted === "function") {
-        onMessagePosted();
-      }
-
-      //Cooldown + sent
-      const interval = setInterval(() => {
-        setCooldown(prev => {
-          if (prev <= 1) {
-            clearInterval(interval);
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
-
-    } catch (err) {
-      console.error("Failed to post message", err);
+      return;
     }
+
+    setFormData({ title: "", body: "" });
+    setCooldown(10);
+    startCooldown(10);
+
+    if (typeof onMessagePosted === "function") onMessagePosted();
+  } catch (err) {
+    console.error("Failed to post message", err);
+  }
   };
 
+const startCooldown = (seconds: number) => {
+  let s = seconds;
+  const interval = setInterval(() => {
+    s -= 1;
+    setCooldown(prev => (prev > 0 ? prev - 1 : 0));
+    if (s <= 0) clearInterval(interval);
+  }, 1000);
+};
 
   return (
     <section className="border-[#999999] border mx-auto mt-4 text-white">
@@ -92,7 +90,7 @@ export default function MessageForm({ onMessagePosted }: { onMessagePosted?: () 
         </div>
         {/* Button */}
         {cooldown > 0 ? (
-          <button type="submit" className="cursor-pointer border border-[#bb7eca] text-[#bb7eca] hover:underline hover:bg-[#bb7eca]/20 active:bg-[#22c55e]/20 font-bold py-2 px-4 mt-4 active:text-[#22c55e] active:border-[#22c55e]">
+          <button type="submit" disabled className="cursor-pointer border border-[#bb7eca] text-[#bb7eca] hover:underline hover:bg-[#bb7eca]/20 active:bg-[#22c55e]/20 font-bold py-2 px-4 mt-4 active:text-[#22c55e] active:border-[#22c55e]">
           {String(cooldown).padStart(2, "0")}
         </button>
         ) : (
