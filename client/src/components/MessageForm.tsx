@@ -53,14 +53,14 @@ export default function MessageForm({ onMessagePosted }: { onMessagePosted?: () 
   }
   };
 
-const startCooldown = (seconds: number) => {
+  const startCooldown = (seconds: number) => {
   let s = seconds;
   const interval = setInterval(() => {
     s -= 1;
     setCooldown(prev => (prev > 0 ? prev - 1 : 0));
     if (s <= 0) clearInterval(interval);
   }, 1000);
-};
+  };
 
   return (
     <section className="border-[#999999] border mx-auto mt-4 text-white">

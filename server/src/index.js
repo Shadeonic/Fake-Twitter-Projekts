@@ -47,14 +47,12 @@ app.get("/api/messages", async (req, res) => {
       .find({})
       .sort({ timestamp: -1 }) // newest first
       .toArray();
-
     res.json(msgs);
   } catch (err) {
     console.error("GET /api/messages failed:", err);
     res.status(500).json({ error: "Failed to fetch messages" });
   }
 });
-
 
 app.post("/api/messages", async (req, res) => {
   const { title, body } = req.body;
@@ -133,7 +131,6 @@ app.post("/api/messages/:id/vote", async (req, res) => {
     res.status(500).json({ error: "Failed to update vote" });
   }
 });
-
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

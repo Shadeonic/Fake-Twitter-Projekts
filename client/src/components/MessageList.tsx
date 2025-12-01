@@ -8,7 +8,12 @@ type Message = {
   vote: number;
 };
 
-export default function Messages() {
+type MessageListProps = {
+  page: number;
+  limit: number;
+};
+
+export default function Messages({ page, limit }: MessageListProps) {
   const [messages, setMessages] = useState<Message[]>([]);
 
   useEffect(() => {
@@ -30,10 +35,12 @@ export default function Messages() {
     loadMessages();
   };
 
+  const start = (page - 1) * limit;
+  const paginated = messages.slice(start, start + limit);
 
   return (
     <div>
-      {messages.map(msg => (
+      {paginated.map(msg => (
         <div className="border-[#999999] border flex flex-col p-4 gap-2 mb-3 relative " key={msg._id}>
           <span className="text-[#bb7eca] gap-2 text-accent">
             <p className="text-lg font-extrabold">{msg.title}</p>
