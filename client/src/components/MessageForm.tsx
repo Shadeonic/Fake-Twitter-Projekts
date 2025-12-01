@@ -15,35 +15,53 @@ export default function MessageForm({ onMessagePosted }: { onMessagePosted?: () 
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const [cooldown, setCooldown] = useState(0);
+
   //Submit poga
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  try{
-  // Send to backend
-  const res = await fetch("http://localhost:4000/api/messages", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(formData),
-  });
+    try{
+    // Send to backend
+      const res = await fetch("http://localhost:4000/api/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-  if (!res.ok) {
-      const data = await res.json();
-      alert(data.error); // 👈 show error to user
-      return;
+      const data = await res.json();//waiting
+
+      if (!res.ok) {
+        const data = await res.json();
+        alert(data.error); // show error to user
+        return;
+      }
+
+      // Clear form
+      setFormData({ title: "", body: "" });
+
+      setCooldown(10); // 10s cooldown
+
+      // Tell parent to refresh messages
+      if (typeof onMessagePosted === "function") {
+        onMessagePosted();
+      }
+
+      //Cooldown + sent
+      const interval = setInterval(() => {
+        setCooldown(prev => {
+          if (prev <= 1) {
+            clearInterval(interval);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+
+    } catch (err) {
+      console.error("Failed to post message", err);
     }
-
-  // Clear form
-  setFormData({ title: "", body: "" });
-
-  // Tell parent to refresh messages
-  if (typeof onMessagePosted === "function") {
-    onMessagePosted();
-  }
-  } catch (err) {
-    console.error("Failed to post message", err);
-  }
-};
+  };
 
 
   return (
@@ -73,9 +91,15 @@ const handleSubmit = async (e: React.FormEvent) => {
           />
         </div>
         {/* Button */}
+        {cooldown > 0 ? (
+          <button type="submit" className="cursor-pointer border border-[#bb7eca] text-[#bb7eca] hover:underline hover:bg-[#bb7eca]/20 active:bg-[#22c55e]/20 font-bold py-2 px-4 mt-4 active:text-[#22c55e] active:border-[#22c55e]">
+          {String(cooldown).padStart(2, "0")}
+        </button>
+        ) : (
         <button type="submit" className="cursor-pointer border border-[#bb7eca] text-[#bb7eca] hover:underline hover:bg-[#bb7eca]/20 active:bg-[#22c55e]/20 font-bold py-2 px-4 mt-4 active:text-[#22c55e] active:border-[#22c55e]">
           Submit
         </button>
+        )}
       </form>
     </section>
   );

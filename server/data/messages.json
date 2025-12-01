@@ -1,13 +1,255 @@
 [
   {
+    "id": 39,
+    "title": "u",
+    "body": "uj",
+    "ip": "::1",
+    "vote": 0,
+    "timestamp": "2025-12-01T08:57:35.410Z",
+    "voters": {}
+  },
+  {
+    "id": 38,
+    "title": "f",
+    "body": "f",
+    "ip": "::1",
+    "vote": 0,
+    "timestamp": "2025-12-01T08:55:54.965Z",
+    "voters": {}
+  },
+  {
+    "id": 37,
+    "title": "y",
+    "body": "y",
+    "ip": "::1",
+    "vote": 0,
+    "timestamp": "2025-12-01T08:55:41.323Z",
+    "voters": {}
+  },
+  {
+    "id": 36,
+    "title": "g",
+    "body": "g",
+    "ip": "::1",
+    "vote": 0,
+    "timestamp": "2025-12-01T08:54:13.041Z",
+    "voters": {}
+  },
+  {
+    "id": 35,
+    "title": "y",
+    "body": "y",
+    "ip": "::1",
+    "vote": 0,
+    "timestamp": "2025-12-01T08:53:56.092Z",
+    "voters": {}
+  },
+  {
+    "id": 34,
+    "title": "7",
+    "body": "7",
+    "ip": "::1",
+    "vote": 0,
+    "timestamp": "2025-12-01T08:53:45.468Z",
+    "voters": {}
+  },
+  {
+    "id": 33,
+    "title": "h",
+    "body": "h",
+    "ip": "::1",
+    "vote": 0,
+    "timestamp": "2025-12-01T08:53:33.483Z",
+    "voters": {}
+  },
+  {
+    "id": 32,
+    "title": "i",
+    "body": "i",
+    "ip": "::1",
+    "vote": 0,
+    "timestamp": "2025-12-01T08:53:17.989Z",
+    "voters": {}
+  },
+  {
+    "id": 31,
+    "title": "n",
+    "body": "n",
+    "ip": "::1",
+    "vote": 0,
+    "timestamp": "2025-12-01T08:52:58.591Z",
+    "voters": {}
+  },
+  {
+    "id": 30,
+    "title": "t",
+    "body": "t",
+    "ip": "::1",
+    "vote": 0,
+    "timestamp": "2025-12-01T08:52:36.759Z",
+    "voters": {}
+  },
+  {
+    "id": 29,
+    "title": "y",
+    "body": "6y",
+    "ip": "::1",
+    "vote": 0,
+    "timestamp": "2025-12-01T08:52:17.306Z",
+    "voters": {}
+  },
+  {
+    "id": 28,
+    "title": "y",
+    "body": "t",
+    "ip": "::1",
+    "vote": 0,
+    "timestamp": "2025-12-01T08:51:43.916Z",
+    "voters": {}
+  },
+  {
+    "id": 27,
+    "title": "y",
+    "body": "y",
+    "ip": "::1",
+    "vote": 0,
+    "timestamp": "2025-12-01T08:51:27.625Z",
+    "voters": {}
+  },
+  {
+    "id": 26,
+    "title": "jj",
+    "body": "jj",
+    "ip": "::1",
+    "vote": 0,
+    "timestamp": "2025-12-01T08:48:18.507Z",
+    "voters": {}
+  },
+  {
+    "id": 25,
+    "title": "l",
+    "body": "kl",
+    "ip": "::1",
+    "vote": 0,
+    "timestamp": "2025-11-29T19:41:29.794Z",
+    "voters": {}
+  },
+  {
+    "id": 24,
+    "title": "kkkk",
+    "body": "ggg",
+    "ip": "::1",
+    "vote": 0,
+    "timestamp": "2025-11-29T19:41:18.211Z",
+    "voters": {}
+  },
+  {
+    "id": 23,
+    "title": "hh",
+    "body": "hh",
+    "ip": "::1",
+    "vote": -1,
+    "timestamp": "2025-11-28T14:04:19.638Z",
+    "voters": {
+      "::1": -1
+    }
+  },
+  {
+    "id": 22,
+    "title": "fff",
+    "body": "fff",
+    "ip": "::1",
+    "vote": 0,
+    "timestamp": "2025-11-28T14:04:04.849Z",
+    "voters": {}
+  },
+  {
+    "id": 21,
+    "title": "fff",
+    "body": "fff",
+    "ip": "::1",
+    "vote": -1,
+    "timestamp": "2025-11-28T14:03:17.028Z",
+    "voters": {
+      "::1": -1
+    }
+  },
+  {
+    "id": 20,
+    "title": "y",
+    "body": "y",
+    "ip": "::1",
+    "vote": 1,
+    "timestamp": "2025-11-28T13:59:22.352Z",
+    "voters": {
+      "::1": 1
+    }
+  },
+  {
+    "id": 19,
+    "title": "g",
+    "body": "g",
+    "ip": "::1",
+    "vote": -1,
+    "timestamp": "2025-11-28T13:59:12.210Z",
+    "voters": {
+      "::1": -1
+    }
+  },
+  {
+    "id": 18,
+    "title": "h",
+    "body": "h",
+    "ip": "::1",
+    "vote": 0,
+    "timestamp": "2025-11-28T13:59:00.108Z",
+    "voters": {}
+  },
+  {
+    "id": 17,
+    "title": "h",
+    "body": "h",
+    "ip": "::1",
+    "vote": 0,
+    "timestamp": "2025-11-28T13:58:49.588Z",
+    "voters": {}
+  },
+  {
+    "id": 16,
+    "title": "y",
+    "body": "y",
+    "ip": "::1",
+    "vote": 0,
+    "timestamp": "2025-11-28T13:58:36.377Z",
+    "voters": {}
+  },
+  {
+    "id": 15,
+    "title": "hh",
+    "body": "h",
+    "ip": "::1",
+    "vote": 0,
+    "timestamp": "2025-11-28T13:43:43.244Z",
+    "voters": {}
+  },
+  {
+    "id": 14,
+    "title": "f",
+    "body": "f",
+    "ip": "::1",
+    "vote": 0,
+    "timestamp": "2025-11-28T13:43:33.130Z",
+    "voters": {}
+  },
+  {
     "id": 13,
     "title": "gg",
     "body": "gg",
     "ip": "::1",
-    "vote": 8,
+    "vote": 6,
     "timestamp": "2025-11-28T09:54:27.932Z",
     "voters": {
-      "::1": 1
+      "::1": -1
     }
   },
   {
@@ -15,10 +257,10 @@
     "title": "111",
     "body": "111",
     "ip": "::1",
-    "vote": -1,
+    "vote": 1,
     "timestamp": "2025-11-28T09:54:17.888Z",
     "voters": {
-      "::1": -1
+      "::1": 1
     }
   },
   {
@@ -26,24 +268,33 @@
     "title": "gg",
     "body": "gg",
     "ip": "::1",
-    "vote": 0,
-    "timestamp": "2025-11-28T09:53:53.209Z"
+    "vote": -1,
+    "timestamp": "2025-11-28T09:53:53.209Z",
+    "voters": {
+      "::1": -1
+    }
   },
   {
     "id": 10,
     "title": "xytjs",
     "body": "xfyjsxr",
     "ip": "::1",
-    "vote": 0,
-    "timestamp": "2025-11-28T09:48:06.715Z"
+    "vote": -1,
+    "timestamp": "2025-11-28T09:48:06.715Z",
+    "voters": {
+      "::1": -1
+    }
   },
   {
     "id": 9,
     "title": "uu",
     "body": "uu",
     "ip": "::1",
-    "vote": 0,
-    "timestamp": "2025-11-28T09:46:17.966Z"
+    "vote": -1,
+    "timestamp": "2025-11-28T09:46:17.966Z",
+    "voters": {
+      "::1": -1
+    }
   },
   {
     "id": 8,
@@ -82,31 +333,43 @@
     "title": "aleksandrs",
     "body": "123",
     "ip": "::1",
-    "vote": 50,
-    "timestamp": "2025-11-28T09:07:55.821Z"
+    "vote": 51,
+    "timestamp": "2025-11-28T09:07:55.821Z",
+    "voters": {
+      "::1": 1
+    }
   },
   {
     "id": 3,
     "title": "yy",
     "body": "y",
     "ip": "::1",
-    "vote": 0,
-    "timestamp": "2025-11-28T09:07:04.565Z"
+    "vote": 1,
+    "timestamp": "2025-11-28T09:07:04.565Z",
+    "voters": {
+      "::1": 1
+    }
   },
   {
     "id": 2,
     "title": "yy",
     "body": "yy",
     "ip": "::1",
-    "vote": 4,
-    "timestamp": "2025-11-28T09:06:59.546Z"
+    "vote": 5,
+    "timestamp": "2025-11-28T09:06:59.546Z",
+    "voters": {
+      "::1": 1
+    }
   },
   {
     "id": 1,
     "title": "yy",
     "body": "yy",
     "ip": "::1",
-    "vote": -4,
-    "timestamp": "2025-11-28T09:06:57.262Z"
+    "vote": -3,
+    "timestamp": "2025-11-28T09:06:57.262Z",
+    "voters": {
+      "::1": 1
+    }
   }
 ]

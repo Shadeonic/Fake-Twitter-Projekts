@@ -39,12 +39,12 @@ app.post("/api/messages", (req, res) => {
     return res.status(400).json({ error: "Title and body required" });
   }
 
-// Rate limiting: 10 seconds per IP
+  // Rate limiting: 10 seconds per IP
   const now = Date.now();
   const last = lastPostTime[ip] || 0;
   const diff = (now - last) / 1000; // seconds
 
-if (diff < 10) {
+  if (diff < 10) {
     return res.status(429).json({ error: `Please wait ${Math.ceil(10 - diff)}s before posting again.` });
   }
 
