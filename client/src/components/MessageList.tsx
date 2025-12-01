@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { io } from "socket.io-client"; 
 
 type Message = {
   _id: string;
@@ -18,6 +19,22 @@ export default function Messages({ page, limit }: MessageListProps) {
 
   useEffect(() => {
     loadMessages();
+
+    const socket = io("http://localhost:4000", { transports: ["websocket"] });
+
+    socket.on("newMessage", (msg: Message) => {
+      setMessages(prev => [msg, ...prev]);
+    });
+
+    socket.on("voteUpdate", (updated: Message) => {
+      setMessages(prev =>
+        prev.map(m => (m._id === updated._id ? updated : m))
+      );
+    });
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   const loadMessages = () => {
@@ -32,7 +49,6 @@ export default function Messages({ page, limit }: MessageListProps) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ delta }),
     });
-    loadMessages();
   };
 
   const start = (page - 1) * limit;

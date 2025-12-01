@@ -3,7 +3,6 @@ import MessageForm from './components/MessageForm';
 import MessageList from './components/MessageList';
 
 export default function App() {
-  const [refresh, setRefresh] = useState(0);
   const [messageSent, setMessageSent] = useState(false);
   const [page, setPage] = useState(1);
   const [limit, setLimit ] = useState(10);
@@ -28,13 +27,12 @@ export default function App() {
       <div className="max-w-[37.95rem] mx-auto px-2">
         <MessageForm
           onMessagePosted={() => {
-            setRefresh(r => r + 1);
             setMessageSent(true);
             setTimeout(() => setMessageSent(false), 10000);
           }}
         />
         <div className="relative h-[3.5rem]"></div>
-        <MessageList key={refresh} page={page} limit={limit}/>
+        <MessageList page={page} limit={limit}/>
       </div>
       <div className="relative h-[2rem]"></div>
       <div className="flex justify-center gap-4 mt-4">

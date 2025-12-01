@@ -1,4 +1,7 @@
 require("dotenv").config();
+const http = require("http");
+const { Server } = require("socket.io");
+
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = process.env.MONGO_URI;
 
@@ -82,7 +85,12 @@ app.post("/api/messages", async (req, res) => {
 
   try {
     const result = await messagesCollection.insertOne(msg);
-    res.status(201).json({ ...msg, _id: result.insertedId });
+    const savedMsg = { ...msg, _id: result.insertedId };
+    //Event to all connected clients
+    io.emit("newMessage", savedMsg);
+    
+    // Respond to the client who posted
+    res.status(201).json(savedMsg);
   } catch (err) {
     console.error("POST /api/messages failed:", err);
     res.status(500).json({ error: "Failed to save message" });
@@ -124,7 +132,7 @@ app.post("/api/messages/:id/vote", async (req, res) => {
       { _id },
       { $set: { voters: msg.voters, vote: msg.vote } }
     );
-
+    io.emit("voteUpdate", msg);
     res.json(msg);
   } catch (err) {
     console.error("POST /api/messages/:id/vote failed:", err);
@@ -132,6 +140,13 @@ app.post("/api/messages/:id/vote", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
+const server = http.createServer(app);
+const io = new Server(server, { cors: { origin: "*" } });
+
+io.on("connection", (socket) => {
+  console.log("Client connected:", socket.id);
+});
+
+server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
