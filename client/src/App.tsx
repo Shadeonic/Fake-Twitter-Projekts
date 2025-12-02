@@ -58,18 +58,19 @@ export default function App() {
       <div className="flex justify-center gap-4 mt-4">
         <button
           onClick={() => setPage((p) => Math.max(p - 1, 1))}
-          className="px-3 py-1 border border-gray-500 rounded"
+          className="cursor-pointer px-3 py-1 border border-gray-500 rounded"
         >
           Prev
         </button>
         <span>Page: {page}</span>
         <button
           onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
-          className="px-3 py-1 border border-gray-500 rounded"
+          className="cursor-pointer px-3 py-1 border border-gray-500 rounded"
         >
           Next
         </button>
       </div>
+      <div className="relative h-[3.5rem]"></div>
     </div>
   );
 }
