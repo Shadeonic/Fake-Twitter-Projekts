@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useMessagesStore } from './stores/messagesStore';
 import MessageForm from './components/MessageForm';
 import MessageList from './components/MessageList';
@@ -9,14 +9,32 @@ export default function App() {
   const [totalPages, setTotalPages] = useState(1);
   const { cooldown } = useMessagesStore();
 
+  // local flag for banner visibility
+  const [bannerVisible, setBannerVisible] = useState(false);
+
+  // show banner when cooldown starts
+  useEffect(() => {
+    if (cooldown > 0) {
+      setBannerVisible(true);
+      const timer = setTimeout(() => setBannerVisible(false), 10000);
+      return () => clearTimeout(timer);
+    }
+  }, [cooldown]);
+
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white font-mono text-sm">
       <div className="relative h-[5.5rem]"></div>
 
-      {/* Banner when cooldown is active */}
-      {cooldown > 0 && (
+      {bannerVisible && (
         <div className="border border-green-600 text-center text-green-600 px-2 py-2 max-w-[37rem] mx-auto relative">
           <span>Message sent.</span>
+          <button
+            type="button"
+            onClick={() => setBannerVisible(false)}
+            className="ml-2 text-white/80 hover:text-red-500 hover:scale-125 transition-all duration-200 cursor-pointer absolute inset-y-0 right-0 w-16"
+          >
+            ✕
+          </button>
         </div>
       )}
 
@@ -34,9 +52,7 @@ export default function App() {
         >
           Prev
         </button>
-
         <span>Page: {page}</span>
-
         <button
           onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
           className="px-3 py-1 border border-gray-500 rounded"
