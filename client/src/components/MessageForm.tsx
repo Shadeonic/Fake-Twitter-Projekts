@@ -5,7 +5,9 @@ export default function MessageForm() {
   const [formData, setFormData] = useState({ title: '', body: '' });
   const { postMessage, cooldown } = useMessagesStore();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -22,7 +24,9 @@ export default function MessageForm() {
     <section className="border-[#999999] border mx-auto mt-4 text-white">
       <form onSubmit={handleSubmit} className="flex flex-col p-4 gap-3">
         <div className="relative border border-[#999999] p-2">
-          <label className="absolute -top-3 left-2 bg-black px-1 text-sm font-bold">Title</label>
+          <label className="absolute -top-3 left-2 bg-black px-1 text-sm font-bold">
+            Title
+          </label>
           <input
             type="text"
             name="title"
@@ -33,7 +37,9 @@ export default function MessageForm() {
           />
         </div>
         <div className="relative border border-[#999999] p-2">
-          <label className="absolute -top-3 left-2 bg-black px-1 text-sm font-bold">Message</label>
+          <label className="absolute -top-3 left-2 bg-black px-1 text-sm font-bold">
+            Message
+          </label>
           <textarea
             name="body"
             value={formData.body}

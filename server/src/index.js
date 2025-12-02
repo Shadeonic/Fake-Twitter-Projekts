@@ -51,7 +51,10 @@ app.use((req, res, next) => {
 // Routes
 app.get('/api/messages', async (req, res) => {
   try {
-    const msgs = await messagesCollection.find({}).sort({ timestamp: -1 }).toArray();
+    const msgs = await messagesCollection
+      .find({})
+      .sort({ timestamp: -1 })
+      .toArray();
     res.json(msgs);
   } catch (err) {
     console.error('GET /api/messages failed:', err);
@@ -72,7 +75,9 @@ app.post('/api/messages', async (req, res) => {
   const last = lastPostTime[ip] || 0;
   const diff = (now - last) / 1000;
   if (diff < 10) {
-    return res.status(429).json({ error: `Please wait ${Math.ceil(10 - diff)}s before posting again.` });
+    return res.status(429).json({
+      error: `Please wait ${Math.ceil(10 - diff)}s before posting again.`,
+    });
   }
   lastPostTime[ip] = now;
 
@@ -123,7 +128,10 @@ app.post('/api/messages/:id/vote', async (req, res) => {
     msg.voters[ip] = delta;
     msg.vote += delta;
 
-    await messagesCollection.updateOne({ _id }, { $set: { voters: msg.voters, vote: msg.vote } });
+    await messagesCollection.updateOne(
+      { _id },
+      { $set: { voters: msg.voters, vote: msg.vote } }
+    );
     io.emit('voteUpdate', msg);
     res.json(msg);
   } catch (err) {
@@ -144,7 +152,10 @@ io.on('connection', (socket) => {
 setInterval(async () => {
   if (!messagesCollection) return;
   try {
-    const msgs = await messagesCollection.find({}).sort({ timestamp: -1 }).toArray();
+    const msgs = await messagesCollection
+      .find({})
+      .sort({ timestamp: -1 })
+      .toArray();
     io.emit('messagesUpdate', msgs);
   } catch (err) {
     console.error('Failed to broadcast messages:', err);

@@ -7,7 +7,11 @@ type MessageListProps = {
   onTotalPages?: (n: number) => void;
 };
 
-export default function Messages({ page, limit, onTotalPages }: MessageListProps) {
+export default function Messages({
+  page,
+  limit,
+  onTotalPages,
+}: MessageListProps) {
   const { messages, loadMessages, vote } = useMessagesStore();
   const totalPages = Math.ceil(messages.length / limit);
 
@@ -26,7 +30,10 @@ export default function Messages({ page, limit, onTotalPages }: MessageListProps
   return (
     <div>
       {paginated.map((msg) => (
-        <div key={msg._id} className="border-[#999999] border flex flex-col p-4 gap-2 mb-3 relative">
+        <div
+          key={msg._id}
+          className="border-[#999999] border flex flex-col p-4 gap-2 mb-3 relative"
+        >
           <span className="text-[#bb7eca] gap-2 text-accent">
             <p className="text-lg font-extrabold">{msg.title}</p>
           </span>
@@ -35,11 +42,17 @@ export default function Messages({ page, limit, onTotalPages }: MessageListProps
             {new Date(msg.timestamp).toLocaleString()}
           </small>
           <div className="flex gap-2 absolute -bottom-3 left-2 bg-black px-2 items-center">
-            <button onClick={() => vote(msg._id, +1)} className="text-green-400 hover:text-green-300 cursor-pointer text-xl">
+            <button
+              onClick={() => vote(msg._id, +1)}
+              className="text-green-400 hover:text-green-300 cursor-pointer text-xl"
+            >
               ⇧
             </button>
             <div>{msg.vote}</div>
-            <button onClick={() => vote(msg._id, -1)} className="text-red-400 hover:text-red-300 cursor-pointer text-xl">
+            <button
+              onClick={() => vote(msg._id, -1)}
+              className="text-red-400 hover:text-red-300 cursor-pointer text-xl"
+            >
               ⇩
             </button>
           </div>

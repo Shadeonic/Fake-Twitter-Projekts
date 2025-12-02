@@ -14,7 +14,10 @@ type MessagesState = {
   cooldown: number;
   loadMessages: () => Promise<void>;
   vote: (_id: string, delta: number) => Promise<void>;
-  postMessage: (title: string, body: string) => Promise<{ ok: boolean; error?: string }>;
+  postMessage: (
+    title: string,
+    body: string
+  ) => Promise<{ ok: boolean; error?: string }>;
 };
 
 // Singleton socket to avoid multiple connections
@@ -36,7 +39,9 @@ export const useMessagesStore = create<MessagesState>((set) => {
 
   s.off('voteUpdate').on('voteUpdate', (updated: Message) => {
     set((state) => ({
-      messages: state.messages.map((m) => (m._id === updated._id ? updated : m)),
+      messages: state.messages.map((m) =>
+        m._id === updated._id ? updated : m
+      ),
     }));
   });
 

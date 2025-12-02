@@ -29,6 +29,13 @@ npm run dev
 --------------------------------------------------------------------------
 FOR ME:
 START SERVER:
+BOTH:
+npm run dev
+
+USE prettier:
+npm run format
+--------------------------------------------------------------------------
+START:
 Back-end:
 cd C:\Users\PC\Desktop\PRAKSE\Fake-Twitter-Projekts\server
 node src/index.js
