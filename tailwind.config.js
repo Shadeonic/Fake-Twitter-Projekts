@@ -1,14 +1,11 @@
 export default {
-  content: [
-    "./index.html",
-    "./client/src/**/*.{js,ts,jsx,tsx}"
-  ],
+  content: ['./index.html', './client/src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
-      fontFamily:{
-        mono: ['"JetBrains Mono"', 'monospace']
-      }
+      fontFamily: {
+        mono: ['"JetBrains Mono"', 'monospace'],
+      },
     },
   },
   plugins: [],
-}
+};

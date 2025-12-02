@@ -5,9 +5,9 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "dev": "nodemon --watch src --ext ts --exec \"ts-node --transpile-only src/index.ts\"",
-    "build": "tsc -p tsconfig.json",
-    "start": "node dist/index.js"
+    "dev": "nodemon --watch src --ext js --exec \"node src/index.js\"",
+    "build": "echo \"No build step needed for plain JS\"",
+    "start": "node src/index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
