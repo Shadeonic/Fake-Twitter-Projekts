@@ -28,32 +28,14 @@ npm run dev
 # Server: http://localhost:4000
 --------------------------------------------------------------------------
 FOR ME:
-START SERVER:
-BOTH:
-npm run dev
-
-USE prettier:
-npm run format
---------------------------------------------------------------------------
 START:
-Back-end:
-cd C:\Users\PC\Desktop\PRAKSE\Fake-Twitter-Projekts\server
-node src/index.js
-
-Front-end:
-cd C:\Users\PC\Desktop\PRAKSE\Fake-Twitter-Projekts\client
+cd C:\Users\PC\Desktop\PRAKSE\Fake-Twitter-Projekts
 npm run dev
 
-TESTS:
-Test in terminal:
-See all messages:
-curl http://localhost:4000/api/messages
+Prettier:
+npm run format
 
-Write new message:
-curl -X POST http://localhost:4000/api/messages -H "Content-Type: application/json" -d "{\"title\":\"Test\",\"body\":\"Hello from curl\"}"
-
-WHERE TO FIND IN LOCALHOST:
-Open:
+LOCALHOST:
 Front-end:
 http://localhost:5173/
 
