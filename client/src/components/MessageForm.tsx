@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { useMessagesStore } from '../stores/messagesStore';
 
-export default function MessageForm() {
+type MessageFormProps = {
+  onSubmitMessage?: () => void;
+};
+
+export default function MessageForm({ onSubmitMessage }: MessageFormProps) {
   const [formData, setFormData] = useState({ title: '', body: '' });
   const { postMessage, cooldown } = useMessagesStore();
 
@@ -16,8 +20,12 @@ export default function MessageForm() {
     e.preventDefault();
     if (cooldown > 0) return;
     const result = await postMessage(formData.title, formData.body);
-    if (result.ok) setFormData({ title: '', body: '' });
-    else alert(result.error);
+    if (result.ok) {
+      setFormData({ title: '', body: '' });
+      onSubmitMessage?.(); // show banner in parent
+    } else {
+      alert(result.error);
+    }
   };
 
   return (

@@ -35,9 +35,9 @@ export default function Messages({
           className="border-[#999999] border flex flex-col p-4 gap-2 mb-3 relative"
         >
           <span className="text-[#bb7eca] gap-2 text-accent">
-            <p className="text-lg font-extrabold">{msg.title}</p>
+            <p className="text-lg font-extrabold break-all">{msg.title}</p>
           </span>
-          <p className="flex gap-2 text-sm ">{msg.body}</p>
+          <p className="flex gap-2 text-sm break-all">{msg.body}</p>
           <small className="flex gap-2 absolute -bottom-3 right-2 bg-black text-[#999999] px-2">
             {new Date(msg.timestamp).toLocaleString()}
           </small>

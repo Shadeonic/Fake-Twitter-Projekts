@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { useMessagesStore } from './stores/messagesStore';
+import { useRef, useState } from 'react';
 import MessageForm from './components/MessageForm';
 import MessageList from './components/MessageList';
 
@@ -7,19 +6,30 @@ export default function App() {
   const [page, setPage] = useState(1);
   const [limit] = useState(10);
   const [totalPages, setTotalPages] = useState(1);
-  const { cooldown } = useMessagesStore();
 
-  // local flag for banner visibility
   const [bannerVisible, setBannerVisible] = useState(false);
+  const hideTimerRef = useRef<number | null>(null);
 
-  // show banner when cooldown starts
-  useEffect(() => {
-    if (cooldown > 0) {
-      setBannerVisible(true);
-      const timer = setTimeout(() => setBannerVisible(false), 10000);
-      return () => clearTimeout(timer);
+  // Show banner and start auto-hide timer
+  const showBanner = () => {
+    setBannerVisible(true);
+    if (hideTimerRef.current) {
+      clearTimeout(hideTimerRef.current);
     }
-  }, [cooldown]);
+    hideTimerRef.current = window.setTimeout(() => {
+      setBannerVisible(false);
+      hideTimerRef.current = null;
+    }, 10000);
+  };
+
+  // Close button: hide now and cancel timer so it won’t reappear
+  const handleCloseBanner = () => {
+    if (hideTimerRef.current) {
+      clearTimeout(hideTimerRef.current);
+      hideTimerRef.current = null;
+    }
+    setBannerVisible(false);
+  };
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white font-mono text-sm">
@@ -30,7 +40,7 @@ export default function App() {
           <span>Message sent.</span>
           <button
             type="button"
-            onClick={() => setBannerVisible(false)}
+            onClick={handleCloseBanner}
             className="ml-2 text-white/80 hover:text-red-500 hover:scale-125 transition-all duration-200 cursor-pointer absolute inset-y-0 right-0 w-16"
           >
             ✕
@@ -39,7 +49,7 @@ export default function App() {
       )}
 
       <div className="max-w-[37.95rem] mx-auto px-2">
-        <MessageForm />
+        <MessageForm onSubmitMessage={showBanner} />
         <div className="relative h-[3.5rem]"></div>
         <MessageList page={page} limit={limit} onTotalPages={setTotalPages} />
       </div>
