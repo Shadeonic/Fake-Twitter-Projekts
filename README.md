@@ -35,6 +35,9 @@ npm run dev
 Prettier:
 npm run format
 
+TESTS:
+npm run test
+
 LOCALHOST:
 Front-end:
 http://localhost:5173/
