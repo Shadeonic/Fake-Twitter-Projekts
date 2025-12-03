@@ -39,7 +39,6 @@ describe('MessageList', () => {
     expect(screen.getByText(/Bar/i)).toBeInTheDocument();
   });
 
-  // 🔽 вот сюда вставляешь новый тест вместо старого снапшота
   it('matches snapshot', () => {
     fakeMessages = [
       { _id: '1', title: 'Snapshot', body: 'Test', timestamp: 0, vote: 1 },
