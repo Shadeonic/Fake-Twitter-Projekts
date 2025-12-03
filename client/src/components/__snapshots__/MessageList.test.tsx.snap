@@ -1,0 +1,95 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MessageList > matches snapshot 1`] = `
+<div>
+  <div>
+    <div
+      class="border-[#999999] border flex flex-col p-4 gap-2 mb-3 relative"
+    >
+      <span
+        class="text-[#bb7eca] gap-2 text-accent"
+      >
+        <p
+          class="text-lg font-extrabold break-words break-all whitespace-pre-wrap"
+        >
+          Snapshot
+        </p>
+      </span>
+      <p
+        class="gap-2 text-sm break-words break-all whitespace-pre-wrap"
+      >
+        Test
+      </p>
+      <small
+        class="flex gap-2 absolute -bottom-3 right-2 bg-black text-[#999999] px-2"
+      >
+        03/12/2025, 17:42:48
+      </small>
+      <div
+        class="flex gap-2 absolute -bottom-3 left-2 bg-black px-2 items-center"
+      >
+        <button
+          class="text-green-400 hover:text-green-300 cursor-pointer text-xl"
+        >
+          ⇧
+        </button>
+        <div>
+          1
+        </div>
+        <button
+          class="text-red-400 hover:text-red-300 cursor-pointer text-xl"
+        >
+          ⇩
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`matches snapshot 1`] = `
+<div>
+  <div>
+    <div
+      class="border-[#999999] border flex flex-col p-4 gap-2 mb-3 relative"
+    >
+      <span
+        class="text-[#bb7eca] gap-2 text-accent"
+      >
+        <p
+          class="text-lg font-extrabold break-words break-all whitespace-pre-wrap"
+        >
+          VoteTest
+        </p>
+      </span>
+      <p
+        class="gap-2 text-sm break-words break-all whitespace-pre-wrap"
+      >
+        Body
+      </p>
+      <small
+        class="flex gap-2 absolute -bottom-3 right-2 bg-black text-[#999999] px-2"
+      >
+        03/12/2025, 17:40:41
+      </small>
+      <div
+        class="flex gap-2 absolute -bottom-3 left-2 bg-black px-2 items-center"
+      >
+        <button
+          class="text-green-400 hover:text-green-300 cursor-pointer text-xl"
+        >
+          ⇧
+        </button>
+        <div>
+          0
+        </div>
+        <button
+          class="text-red-400 hover:text-red-300 cursor-pointer text-xl"
+        >
+          ⇩
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
